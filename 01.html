@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои любимые фильмы</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .movie-card {
+            display: inline-block;
+            width: 220px;
+            margin: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 16px;
+        }
+
+        .movie-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .movie-card h2 {
+            font-size: 18px;
+            margin: 10px 0 5px;
+        }
+
+        .movie-card p {
+            color: #666;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const MovieCard = ({ title, year, poster }) => {
+        return (
+            <div className="movie-card">
+                <img src={poster} alt={`Постер фильма ${title}`} />
+                <h2>{title}</h2>
+                <p>{year}</p>
+            </div>
+        );
+    };
+
+    const App = () => (
+        <>
+            <MovieCard
+                title="Интерстеллар"
+                year="2014"
+                poster="https://www.kino-teatr.ru/movie/posters/big/6/2/55826.jpg"
+            />
+            <MovieCard
+                title="Начало"
+                year="2003"
+                poster="https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/8ab9a119-dd74-44f0-baec-0629797483d7/220x330"
+            />
+            <MovieCard
+                title="Матрица"
+                year="1999"
+                poster="https://www.kino-teatr.ru/movie/posters/big/8/2/26428.jpg"
+            />
+        </>
+    );
+
+    const root = document.getElementById('root');
+    ReactDOM.createRoot(root).render(<App />);
+</script>
+
+</body>
+</html>

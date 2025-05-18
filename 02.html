@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <title>React фильмы</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #EDE7ED;
+            color: #333;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background: #519674;
+            color: white;
+            padding: 15px 20px;
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            background: #CDCDC3;
+            box-shadow: 0 0 12px #bbb;
+            overflow: hidden;
+        }
+
+        nav.sidebar {
+            width: 220px;
+            background: #8DAC99;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        nav.sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            background: rgba(255 255 255 / 0.15);
+            transition: background-color 0.3s;
+            user-select: none;
+        }
+
+        nav.sidebar a:hover {
+            background-color: #519674;
+            cursor: pointer;
+        }
+
+        section.content {
+            flex: 1;
+            padding: 20px 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-content: flex-start;
+            background: #EDE7ED;
+        }
+
+        .movie-card {
+            background: white;
+            width: 220px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+            user-select: none;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-bottom: 3px solid #519674;
+        }
+
+        .movie-info {
+            padding: 12px 15px;
+            text-align: center;
+            color: #444;
+        }
+
+        .movie-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 8px 0 4px;
+            color: #519674;
+        }
+
+        .movie-year {
+            font-size: 16px;
+            color: #8DAC99;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+
+<script type="text/babel">
+
+    const Header = () => (
+        <header>
+            Мои любимые фильмы
+        </header>
+    );
+
+    const MovieCard = ({ title, year, poster }) => (
+        <div className="movie-card">
+            <img src={poster} alt={`Постер фильма ${title}`} />
+            <div className="movie-info">
+                <div className="movie-title">{title}</div>
+                <div className="movie-year">{year}</div>
+            </div>
+        </div>
+    );
+
+    const Sidebar = () => (
+        <nav className="sidebar">
+            <a href="#">Главная</a>
+            <a href="#">Фильмы</a>
+            <a href="#">Жанры</a>
+            <a href="#">Новости</a>
+            <a href="#">Контакты</a>
+        </nav>
+    );
+
+    const Content = () => {
+        const movies = [
+            {
+                title: "Начало",
+                year: 2010,
+                poster: "https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/8ab9a119-dd74-44f0-baec-0629797483d7/220x330"
+            },
+            {
+                title: "Матрица",
+                year: 1999,
+                poster: "https://www.kino-teatr.ru/movie/posters/big/8/2/26428.jpg"
+            },
+            {
+                title: "Интерстеллар",
+                year: 2014,
+                poster: "https://www.kino-teatr.ru/movie/posters/big/6/2/55826.jpg"
+            }
+        ];
+
+        return (
+            <section className="content">
+                {movies.map((movie, i) => (
+                    <MovieCard
+                        key={i}
+                        title={movie.title}
+                        year={movie.year}
+                        poster={movie.poster}
+                    />
+                ))}
+            </section>
+        );
+    };
+
+    const App = () => (
+        <>
+            <Header />
+            <div className="main">
+                <Sidebar />
+                <Content />
+            </div>
+        </>
+    );
+
+    const root = ReactDOM.createRoot(document.getElementById('app'));
+    root.render(<App />);
+</script>
+
+
+</script>
+</body>
+</html>
